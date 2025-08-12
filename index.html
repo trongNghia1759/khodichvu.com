@@ -88,26 +88,26 @@
 
 <!-- Mật khẩu overlay -->
 <div id="overlay">
+  <h2>Kho Tương Tác</h2>
   <div style="color: pink; font-size: 13px; margin-bottom: 10px;">
-    Đây Là Trang Của Các Admin "Đội Nhà Bo"
-  </div>
-  <div style="color: pink; font-size: 13px; margin-bottom: 10px;">
-    "Nhập MK Admin Hoặc Khách Hàng Vào Đây"
+    "Nhập MK Của Admin - Khách Hàng Vào Đây"
   </div>
   <input type="password" id="password" placeholder="Nhập mật khẩu...">
-  <button onclick="checkPassword()">Vào trang</button>
+  <button onclick="checkPassword()">Tiếp Tục</button>
 </div>
 
 <script>
   function checkPassword() {
-    const input = document.getElementById("password").value;
-    const correctPassword = "damtrongnghia1759";
-    if (input === correctPassword) {
-      document.getElementById("overlay").style.display = "none";
-    } else {
-      alert("Sai mật khẩu!");
-    }
+  const input = document.getElementById("password").value;
+  const correctPasswords = ["ADMIN-damtrongnghia1759", "damtronghan2106", "nguyenthanhbinh"];
+
+  if (correctPasswords.includes(input)) {
+    document.getElementById("overlay").style.display = "none";
+  } else {
+    alert("Sai mật khẩu!");
   }
+}
+
 </script>
 
 <style>
