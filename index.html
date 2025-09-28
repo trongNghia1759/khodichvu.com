@@ -112,14 +112,15 @@ body {
         }
 
 /* 💡 THÊM PHẦN VIỀN BẰNG PSEUDO-ELEMENT (LỚP TRÊN) */
-.avatar-container {
-    width: 220px;   /* tăng size để viền to hơn */
-    height: 220px;
-    background-image: url('vien.png');
-    background-size: contain; /* giữ nguyên tỉ lệ viền */
-    background-repeat: no-repeat;
-    background-position: center;
-}
+.avatar-wrapper::after {
+    content: ""; /* Bắt buộc */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    pointer-events: none; /* Giúp không chặn click */
 
     /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
     background-image: url('vien.png'); 
@@ -131,8 +132,8 @@ body {
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
+    width: 95%;
+    height: 95%;
     object-fit: cover;
     border-radius: 50%;
     border: 0px solid #fff; /* Viền trắng bên trong (sát ảnh) */
@@ -143,6 +144,7 @@ body {
     /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
     content: url('avatar.png'); 
 }
+
 
 .name {
     font-size: 2.5em;
