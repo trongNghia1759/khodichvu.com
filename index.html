@@ -26,28 +26,59 @@
         /* ------------------------------------------------------------------ */
         /* Yêu cầu: Nền ngoài bằng ảnh và Nền trong suốt */
         /* ------------------------------------------------------------------ */
-        body {
-            color: #fff; /* Đổi màu chữ mặc định thành TRẮNG để dễ nhìn trên ảnh nền */
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            /* 💡 THAY ẢNH NỀN CỦA BẠN VÀO ĐÂY */
-            background-image: url('bgr.png'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
+        /* 1. KHỐI BODY - Đã bỏ thuộc tính background-image và background-attachment */
+body {
+    color: #fff; /* Đổi màu chữ mặc định thành TRẮNG để dễ nhìn trên ảnh nền */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* Thêm align-items để căn giữa theo chiều dọc, giúp bio-container luôn ở giữa màn hình */
+    align-items: center; 
+    padding: 20px;
+    
+    /* ĐÃ XÓA: background-image, background-size, background-position, background-attachment */
+}
 
-        .bio-container {
-            max-width: 600px;
-            width: 100%;
-            background: transparent; /* Nền trong suốt hoàn toàn */
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Tạo độ nổi cho toàn bộ khối */
-            padding: 30px 20px;
-            text-align: center;
-        }
+/* ---------------------------------------------------- */
+
+/* 2. KHỐI NỀN CỐ ĐỊNH TUYỆT ĐỐI MỚI */
+.fixed-background {
+    /* Khóa ảnh nền vào vị trí màn hình */
+    position: fixed; 
+    
+    /* Căng ảnh ra toàn màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Đặt ảnh nền ở lớp dưới cùng, phía sau nội dung */
+    z-index: -1; 
+    
+    /* 💡 THAY ẢNH NỀN CỦA BẠN VÀO ĐÂY */
+    background-image: url('bgr.png'); 
+    background-size: cover;
+    background-position: center;
+    /* Không cần background-attachment: fixed nữa */
+}
+
+/* ---------------------------------------------------- */
+
+/* 3. KHỐI NỘI DUNG */
+.bio-container {
+    max-width: 600px;
+    width: 100%;
+    background: transparent; /* Nền trong suốt hoàn toàn */
+    
+    /* Định nghĩa nếu bạn có dùng biến --border-radius */
+    /* Bạn nên định nghĩa var(--border-radius) ở :root để tránh lỗi */
+    border-radius: var(--border-radius, 12px); 
+    
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Tạo độ nổi cho toàn bộ khối */
+    padding: 30px 20px;
+    text-align: center;
+}
+
         
         /* ------------------------------------------------------------------ */
         /* Header/Profile & Avatar/Viền (Cập nhật dùng link ảnh cho viền) */
@@ -57,32 +88,69 @@
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Bóng chữ cho dễ đọc */
         }
 
-        /* Avatar và viền (Dùng background-image cho viền) */
-        .avatar-wrapper {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            padding: 5px;
-            
-            /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
-            background-image: url('vien.png'); 
-            background-size: cover;
-            background-position: center;
-            
-            background-color: transparent; 
-            box-shadow: none; 
-        }
+       /* Avatar và viền */
+.avatar-wrapper {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    /* ❌ Bỏ padding ở đây */
+    
+    /* 💡 Cần thiết lập position: relative để pseudo-element căn theo nó */
+    position: relative; 
+    overflow: hidden; /* Giúp giữ ảnh avatar nằm gọn trong khung tròn */
 
-        .avatar {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #fff; /* Viền trắng bên trong (sát ảnh) */
-            /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
-            content: url('avatar.png'); 
-        }
+    /* ❌ Bỏ các thuộc tính background-image cũ */
+    background-image: none; 
+    background-color: transparent; 
+    box-shadow: none; 
+}
+
+/* 💡 THÊM PHẦN VIỀN BẰNG PSEUDO-ELEMENT (LỚP TRÊN) */
+.avatar-wrapper::after {
+    content: ""; /* Bắt buộc */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    pointer-events: none; /* Giúp không chặn click */
+
+    /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
+    background-image: url('vien.png'); 
+    background-size: cover;
+    background-position: center;
+
+    /* 💡 Đảm bảo viền nằm trên ảnh */
+    z-index: 2; 
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #fff; /* Viền trắng bên trong (sát ảnh) */
+    
+    /* 💡 Đặt z-index thấp hơn viền */
+    z-index: 1; 
+    
+    /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
+    content: url('avatar.png'); 
+}
+
+.name {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--cool-pink); 
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
 
         .name {
             font-size: 2.5em;
@@ -354,7 +422,7 @@
         
         
            <a href="https://trongnghia1759.github.io/devbase/" target="_blank" class="link-btn rainbow-border">
-    <img src="web.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="web.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Web DevBase Dịch Vụ Free-Phí
 </a>
 
@@ -365,7 +433,7 @@
 
 
 <a href="https://locket.cam/bebo1759" target="_blank" class="link-btn rainbow-border">
-    <img src="locket.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="locket.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Locket
 </a>
 
@@ -377,7 +445,7 @@
 
 
 <a href="https://www.facebook.com/profile.php?id=61576009787673" target="_blank" class="link-btn rainbow-border">
-    <img src="facebook.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="facebook.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Facebook
 </a>
 
@@ -388,7 +456,7 @@
 
 
 <a href="https://www.instagram.com/bo1759_n?igsh=YzljYTk1ODg3Zg==" target="_blank" class="link-btn rainbow-border">
-    <img src="instagram.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="instagram.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Instagram
 </a>
 
@@ -400,7 +468,7 @@
 
 
 <a href="https://vm.tiktok.com/ZSS6vqAvM/" target="_blank" class="link-btn rainbow-border">
-    <img src="tiktok.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="tiktok.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Tik Tok Chính
 </a>
 
@@ -412,7 +480,7 @@
 
 
 <a href="https://vm.tiktok.com/ZSSrwQnGQ/" target="_blank" class="link-btn rainbow-border">
-    <img src="tiktok.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="tiktok.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Tik Tok Đú Theo Dân IT
 </a>
 
@@ -424,7 +492,7 @@
 
 
 <a href="https://vm.tiktok.com/ZSHWm17R6tnqm-bCzpR/" target="_blank" class="link-btn rainbow-border">
-    <img src="tiktok.png" alt="Locket" style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
+    <img src="tiktok.png" alt="." style="height: 1em; width: 1em; vertical-align: middle; margin-right: 0.25em;">
     Tik Tok Buồn - Tâm Trạng
 </a>
 
