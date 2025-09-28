@@ -6,415 +6,274 @@
     <title>Đàm Trọng Nghĩa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    <style>
-        /* Thiết lập cơ bản và font chữ */
-        :root {
-            --cool-pink: #000000; /* Hồng Hot Pink */
-            --dark-pink: #C71585; /* Hồng Đậm */
-            --light-pink: #000000; /* Hồng Nhạt */
-            --text-color: #333; /* Màu chữ chính cho menu */
-            --border-radius: 12px;
-        }
+   <style>
+:root {
+    --cool-pink: #000000; /* Hồng nổi bật */
+    --dark-pink: #C71585;
+    --light-pink: #FFB6C1;
+    --text-color: #333;
+    --border-radius: 12px;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        /* ------------------------------------------------------------------ */
-        /* Yêu cầu: Nền ngoài bằng ảnh và Nền trong suốt */
-        /* ------------------------------------------------------------------ */
-        /* 1. KHỐI BODY - Đã bỏ thuộc tính background-image và background-attachment */
+/* Body + nền ảnh */
 body {
-    color: #fff; /* Đổi màu chữ mặc định thành TRẮNG để dễ nhìn trên ảnh nền */
+    color: #fff;
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    /* Thêm align-items để căn giữa theo chiều dọc, giúp bio-container luôn ở giữa màn hình */
-    align-items: center; 
+    align-items: center;
     padding: 20px;
-    
-    /* ĐÃ XÓA: background-image, background-size, background-position, background-attachment */
-}
-
-/* ---------------------------------------------------- */
-
-/* 2. KHỐI NỀN CỐ ĐỊNH TUYỆT ĐỐI MỚI */
-.fixed-background {
-    /* Khóa ảnh nền vào vị trí màn hình */
-    position: fixed; 
-    
-    /* Căng ảnh ra toàn màn hình */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Đặt ảnh nền ở lớp dưới cùng, phía sau nội dung */
-    z-index: -1; 
-    
-    /* 💡 THAY ẢNH NỀN CỦA BẠN VÀO ĐÂY */
     background-image: url('bgr.png'); 
     background-size: cover;
     background-position: center;
-    /* Không cần background-attachment: fixed nữa */
+    background-attachment: fixed;
 }
 
-/* ---------------------------------------------------- */
-
-/* 3. KHỐI NỘI DUNG */
+/* Container chính */
 .bio-container {
     max-width: 600px;
     width: 100%;
-    background: transparent; /* Nền trong suốt hoàn toàn */
-    
-    /* Định nghĩa nếu bạn có dùng biến --border-radius */
-    /* Bạn nên định nghĩa var(--border-radius) ở :root để tránh lỗi */
-    border-radius: var(--border-radius, 12px); 
-    
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Tạo độ nổi cho toàn bộ khối */
+    background: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
     padding: 30px 20px;
     text-align: center;
 }
 
-        
-        /* ------------------------------------------------------------------ */
-        /* Header/Profile & Avatar/Viền (Cập nhật dùng link ảnh cho viền) */
-        /* ------------------------------------------------------------------ */
-        .profile-header {
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Bóng chữ cho dễ đọc */
-        }
-
-      Body {
-            color: #fff; /* Đổi màu chữ mặc định thành TRẮNG để dễ nhìn trên ảnh nền */
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            /* 💡 THAY ẢNH NỀN CỦA BẠN VÀO ĐÂY */
-            background-image: url('bgr.png'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        .bio-container {
-            max-width: 600px;
-            width: 100%;
-            background: transparent; /* Nền trong suốt hoàn toàn */
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Tạo độ nổi cho toàn bộ khối */
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-/* 💡 THÊM PHẦN VIỀN BẰNG PSEUDO-ELEMENT (LỚP TRÊN) */
+/* Avatar + viền */
+.avatar-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+}
 .avatar-wrapper::after {
-    content: ""; /* Bắt buộc */
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     border-radius: 50%;
-    pointer-events: none; /* Giúp không chặn click */
-
-    /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
-    background-image: url('vien.png'); 
+    background-image: url('vien.png');
     background-size: cover;
     background-position: center;
-
-    /* 💡 Đảm bảo viền nằm trên ảnh */
-    z-index: 2; 
+    z-index: 2;
+    pointer-events: none;
 }
-
 .avatar {
     width: 95%;
     height: 95%;
     object-fit: cover;
     border-radius: 50%;
-    border: 0px solid #fff; /* Viền trắng bên trong (sát ảnh) */
-    
-    /* 💡 Đặt z-index thấp hơn viền */
-    z-index: 1; 
-    
-    /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
-    content: url('avatar.png'); 
+    border: 2px solid #fff;
+    position: relative;
+    z-index: 1;
 }
 
-
+/* Tên + tick xanh */
 .name {
     font-size: 2.5em;
     font-weight: 700;
-    color: var(--cool-pink); 
+    color: var(--cool-pink);
     margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
-
-
-        .name {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--cool-pink); 
-            margin-bottom: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-
-        .tagline, .qr-heading {
-            color: var(--light-pink);
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Tick Xanh (Hiệu ứng) */
-        .verified-tick {
-            color: #1DA1F2;
-            font-size: 0.8em;
-            margin-left: 8px;
-            text-shadow: none;
-        }
-        .verified-link {
-            text-decoration: none;
-        }
-
-        /* Social Links Buttons */
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .link-btn {
-            display: block;
-            padding: 15px;
-            text-decoration: none;
-            color: #fff;
-            background-color: var(--cool-pink);
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .link-btn:hover {
-            background-color: var(--dark-pink);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .link-btn i {
-            margin-right: 10px;
-        }
-
-       /* Viền màu cầu vồng cho Button (Giữ nguyên) */
-.rainbow-border {
-    /* 1. Đặt nền trong suốt cho nội dung nút */
-    background-color: transparent; 
-    /* 2. Đảm bảo nút có vị trí tương đối để pseudo-element hoạt động */
-    position: relative; 
-    /* 3. Màu chữ (tùy chọn, để dễ nhìn) */
-    color: #fff; /* Ví dụ: màu trắng */
-    /* 4. Các thuộc tính nút khác (tùy chỉnh) */
-    padding: 10px 20px;
-    border: none; /* Rất quan trọng: loại bỏ border mặc định */
-    border-radius: 50px; /* Phải khớp với border-radius của ::before */
-    cursor: pointer;
-    overflow: hidden; /* Giúp các phần tử bên trong không tràn ra ngoài */
-    z-index: 0;
+.verified-tick {
+    color: #1DA1F2;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+.tagline, .qr-heading {
+    color: var(--light-pink);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+/* Social Links Buttons */
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+.link-btn {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #fff;
+    background-color: var(--cool-pink);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.link-btn:hover {
+    background-color: var(--dark-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.link-btn i {
+    margin-right: 10px;
+}
+
+/* Viền rainbow cho nút */
+.rainbow-border {
+    background-color: transparent;
+    position: relative;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 0;
+}
 .rainbow-border::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     border-radius: 50px;
-    /* Dải màu cầu vồng */
-    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-    /* Độ dày của viền (padding: 3px) */
-    padding: 3px; 
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, 
+                                #00ff00, #0000ff, #4b0082, #9400d3);
+    padding: 3px;
     z-index: -1;
-    /* Kỹ thuật tạo viền rỗng */
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     transition: opacity 0.3s ease;
 }
-
-/* Thêm hiệu ứng hover (tùy chọn) */
 .rainbow-border:hover::before {
-    /* Ví dụ: làm cho viền sáng hơn khi hover */
-    opacity: 0.8; 
+    opacity: 0.8;
 }
 
+/* QR */
+.footer-section {
+    padding-top: 20px;
+    border-top: 1px solid var(--cool-pink);
+}
+.qr-heading {
+    margin-bottom: 15px;
+}
+.qr-code {
+    width: 150px;
+    height: 150px;
+    border: 5px solid var(--cool-pink);
+    border-radius: var(--border-radius);
+    display: block;
+    margin: 0 auto;
+    content: url('mb.png');
+}
 
-        /* Footer & QR Code */
-        .footer-section {
-            padding-top: 20px;
-            border-top: 1px solid var(--cool-pink);
-        }
+/* Menu 3 gạch */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: var(--cool-pink);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s;
+}
+.menu-toggle:hover {
+    background: var(--dark-pink);
+}
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 60px;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-menu.active {
+    left: 0;
+}
+.sidebar-menu a {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    border-bottom: 1px solid var(--light-pink);
+    transition: background 0.2s;
+}
+.sidebar-menu a:hover {
+    background: var(--light-pink);
+    color: var(--dark-pink);
+}
 
-        .qr-heading {
-            margin-bottom: 15px;
-        }
+/* Bot phát nhạc */
+.music-bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--dark-pink);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease, background 0.3s;
+    z-index: 999;
+}
+.music-bot:hover {
+    transform: scale(1.05);
+    background: var(--cool-pink);
+}
+.music-bot i {
+    font-size: 1.2em;
+    animation: spin 2s linear infinite;
+    display: none;
+}
+.music-bot.playing i {
+    display: block;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            border: 5px solid var(--cool-pink);
-            border-radius: var(--border-radius);
-            display: block;
-            margin: 0 auto;
-            /* 💡 THAY ẢNH QR CODE CỦA BẠN VÀO ĐÂY */
-            content: url('mb.png');
-        }
-
-        /* Menu 3 gạch (góc trái) */
-        .menu-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001;
-            background: var(--cool-pink);
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.5em;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: background 0.3s;
-        }
-
-        .menu-toggle:hover {
-            background: var(--dark-pink);
-        }
-
-        .sidebar-menu {
-            position: fixed;
-            top: 0;
-            left: -250px; 
-            width: 250px;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98); 
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            padding-top: 60px;
-            z-index: 1000;
-            transition: left 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-menu.active {
-            left: 0;
-        }
-
-        .sidebar-menu a {
-            padding: 15px 20px;
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 600;
-            border-bottom: 1px solid var(--light-pink);
-            transition: background 0.2s;
-        }
-
-        .sidebar-menu a:hover {
-            background: var(--light-pink);
-            color: var(--dark-pink);
-        }
-
-        /* Bot Phát Nhạc (Góc dưới bên phải) */
-        .music-bot {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--dark-pink);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.2s ease, background 0.3s;
-            z-index: 999;
-        }
-
-        .music-bot:hover {
-            transform: scale(1.05);
-            background: var(--cool-pink);
-        }
-
-        .music-bot i {
-            font-size: 1.2em;
-            animation: spin 2s linear infinite;
-            display: none;
-        }
-
-        .music-bot.playing i {
-            display: block;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Media Queries cho Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .bio-container {
-                padding: 20px 15px;
-            }
-            .name {
-                font-size: 2em;
-            }
-            .avatar-wrapper {
-                width: 120px;
-                height: 120px;
-            }
-            .link-btn {
-                font-size: 1em;
-                padding: 12px;
-            }
-            .menu-toggle {
-                top: 10px;
-                left: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .name {
-                font-size: 1.8em;
-            }
-            .music-bot {
-                bottom: 10px;
-                right: 10px;
-                padding: 8px 12px;
-            }
-            .sidebar-menu {
-                width: 200px;
-            }
-        }
-    </style>
+/* Responsive */
+@media (max-width: 768px) {
+    body { padding: 10px; }
+    .bio-container { padding: 20px 15px; }
+    .name { font-size: 2em; }
+    .avatar-wrapper { width: 120px; height: 120px; }
+    .link-btn { font-size: 1em; padding: 12px; }
+    .menu-toggle { top: 10px; left: 10px; }
+}
+@media (max-width: 480px) {
+    .name { font-size: 1.8em; }
+    .music-bot { bottom: 10px; right: 10px; padding: 8px 12px; }
+    .sidebar-menu { width: 200px; }
+}
+</style>
 </head>
 <body>
 
@@ -438,7 +297,7 @@ body {
             </div>
 
             <h1 class="name">
-                Đàm Trọng Nghĩa<a href="tick.png" class="verified-link" target="_blank" title="Link Xác Thực">
+                Đàm Trọng Nghĩa<a href="tick.png" class="verified-link" target="_blank" title="Link Xác Thực"><br>
                     <i class="fas fa-badge-check verified-tick"></i>
                 </a>
             </h1>
@@ -446,7 +305,7 @@ body {
             Lên App Pro - Locket - Capcut...<br>
             Làm Website Theo Yêu Cầu</p>
         </header>
-
+<br><br>
         <section class="social-links">
         
         
