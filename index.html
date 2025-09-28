@@ -88,23 +88,28 @@ body {
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Bóng chữ cho dễ đọc */
         }
 
-       /* Avatar và viền */
-.avatar-wrapper {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    /* ❌ Bỏ padding ở đây */
-    
-    /* 💡 Cần thiết lập position: relative để pseudo-element căn theo nó */
-    position: relative; 
-    overflow: hidden; /* Giúp giữ ảnh avatar nằm gọn trong khung tròn */
+      Body {
+            color: #fff; /* Đổi màu chữ mặc định thành TRẮNG để dễ nhìn trên ảnh nền */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            /* 💡 THAY ẢNH NỀN CỦA BẠN VÀO ĐÂY */
+            background-image: url('bgr.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-    /* ❌ Bỏ các thuộc tính background-image cũ */
-    background-image: none; 
-    background-color: transparent; 
-    box-shadow: none; 
-}
+        .bio-container {
+            max-width: 600px;
+            width: 100%;
+            background: transparent; /* Nền trong suốt hoàn toàn */
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Tạo độ nổi cho toàn bộ khối */
+            padding: 30px 20px;
+            text-align: center;
+        }
 
 /* 💡 THÊM PHẦN VIỀN BẰNG PSEUDO-ELEMENT (LỚP TRÊN) */
 .avatar-wrapper::after {
@@ -112,8 +117,8 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 120%;
+    height: 120%;
     border-radius: 50%;
     pointer-events: none; /* Giúp không chặn click */
 
