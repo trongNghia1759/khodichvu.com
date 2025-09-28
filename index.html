@@ -218,23 +218,49 @@ body {
             margin-right: 10px;
         }
 
-        /* Viền màu cầu vồng cho Button (Giữ nguyên) */
-        .rainbow-border::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            padding: 3px;
-            z-index: -1;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            transition: opacity 0.3s ease;
-        }
+       /* Viền màu cầu vồng cho Button (Giữ nguyên) */
+.rainbow-border {
+    /* 1. Đặt nền trong suốt cho nội dung nút */
+    background-color: transparent; 
+    /* 2. Đảm bảo nút có vị trí tương đối để pseudo-element hoạt động */
+    position: relative; 
+    /* 3. Màu chữ (tùy chọn, để dễ nhìn) */
+    color: #fff; /* Ví dụ: màu trắng */
+    /* 4. Các thuộc tính nút khác (tùy chỉnh) */
+    padding: 10px 20px;
+    border: none; /* Rất quan trọng: loại bỏ border mặc định */
+    border-radius: 50px; /* Phải khớp với border-radius của ::before */
+    cursor: pointer;
+    overflow: hidden; /* Giúp các phần tử bên trong không tràn ra ngoài */
+    z-index: 0;
+}
+
+.rainbow-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    /* Dải màu cầu vồng */
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    /* Độ dày của viền (padding: 3px) */
+    padding: 3px; 
+    z-index: -1;
+    /* Kỹ thuật tạo viền rỗng */
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: opacity 0.3s ease;
+}
+
+/* Thêm hiệu ứng hover (tùy chọn) */
+.rainbow-border:hover::before {
+    /* Ví dụ: làm cho viền sáng hơn khi hover */
+    opacity: 0.8; 
+}
+
 
         /* Footer & QR Code */
         .footer-section {
