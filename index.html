@@ -10,11 +10,11 @@
     :root {
       --cool-pink: #000000; /* Hồng nổi bật */
       --dark-pink: #C71585;
-      --light-pink: #FFB6C1;
+      --light-pink: #000000;
       --text-color: #333;
       --border-radius: 12px;
       --size: 100px;          /* kích thước viền */
-      --avatar-size: 95px;   /* kích thước avatar (nhỏ hơn để lộ viền) */
+      --avatar-size: 100px;   /* kích thước avatar (nhỏ hơn để lộ viền) */
       --frame-url: url("vien.png");
     }
 
@@ -128,35 +128,45 @@
       margin-right: 10px;
     }
 
-    /* Viền rainbow cho nút */
-    .rainbow-border {
-      background-color: transparent;
-      position: relative;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .rainbow-border::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50px;
-      background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, 
-                                  #00ff00, #0000ff, #4b0082, #9400d3);
-      padding: 3px;
-      z-index: -1;
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      transition: opacity 0.3s ease;
-    }
-    .rainbow-border:hover::before {
-      opacity: 0.8;
-    }
+   /* Viền rainbow cho nút */
+.rainbow-border {
+  background-color: rgba(128, 128, 128, 0.2); /* xám trong suốt */
+  position: relative;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.rainbow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #9400d3
+  );
+  padding: 3px;
+  z-index: -1;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.3s ease;
+}
+
+.rainbow-border:hover::before {
+  opacity: 0.8;
+}
 
     /* QR */
     .footer-section {
