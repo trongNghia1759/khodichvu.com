@@ -48,32 +48,31 @@ body {
     text-align: center;
 }
 
+/* :root {
+  --size: 200px;          /* kích thước tổng (viền) */
+  --avatar-size: 195px;   /* kích thước avatar */
+  --frame-url: url("vien.png");
+  --avatar-url: url("avatar.png");
+}
+
 /* Avatar + viền */
 .avatar-wrapper {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
+  width: var(--size);
+  height: var(--size);
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  background: var(--avatar-url) center/var(--avatar-size) no-repeat;
+  overflow: hidden;
 }
+
 .avatar-wrapper::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background-image: url('vien.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 2;
-    pointer-events: none;
-}
-.avatar {
-    width: 95%;
-    height: 95%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    position: relative;
-    z-index: 1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--frame-url) center/cover no-repeat;
+  pointer-events: none;
 }
 
 /* Tên + tick xanh */
@@ -292,10 +291,7 @@ body {
     <div class="bio-container">
         
         <header class="profile-header">
-            <div class="avatar-wrapper">
-                <div class="avatar" id="profile-avatar"></div>
-            </div>
-
+           <div class="avatar-wrapper"></div>
             <h1 class="name">
                 Đàm Trọng Nghĩa<a href="tick.png" class="verified-link" target="_blank" title="Link Xác Thực"><br>
                     <i class="fas fa-badge-check verified-tick"></i>
