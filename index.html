@@ -115,19 +115,22 @@ body {
 .avatar-wrapper::after {
     content: ""; /* Bắt buộc */
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 101%;
-    height: 101%;
+    
+    /* 💡 ĐIỀU CHỈNH KÍCH THƯỚC VÀ VỊ TRÍ CHO VIỀN TO HƠN AVATAR */
+    top: -5px; /* Dịch lên trên 5px */
+    left: -5px; /* Dịch sang trái 5px */
+    width: calc(100% + 10px); /* Tăng kích thước thêm 10px (5px trái + 5px phải) */
+    height: calc(100% + 10px); /* Tăng kích thước thêm 10px (5px trên + 5px dưới) */
+    
     border-radius: 50%;
     pointer-events: none; /* Giúp không chặn click */
 
-    /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
+    /* THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
     background-image: url('vien.png'); 
     background-size: cover;
     background-position: center;
 
-    /* 💡 Đảm bảo viền nằm trên ảnh */
+    /* Đảm bảo viền nằm trên ảnh */
     z-index: 2; 
 }
 
@@ -138,10 +141,10 @@ body {
     border-radius: 50%;
     border: 4px solid #fff; /* Viền trắng bên trong (sát ảnh) */
     
-    /* 💡 Đặt z-index thấp hơn viền */
+    /* Đặt z-index thấp hơn viền */
     z-index: 1; 
     
-    /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
+    /* THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
     content: url('avatar.png'); 
 }
 
