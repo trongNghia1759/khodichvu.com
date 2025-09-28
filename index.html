@@ -115,49 +115,66 @@ body {
 .avatar-wrapper::after {
     content: ""; /* Bắt buộc */
     position: absolute;
-    
-    /* 💡 ĐIỀU CHỈNH KÍCH THƯỚC VÀ VỊ TRÍ CHO VIỀN TO HƠN AVATAR */
-    top: -5px; /* Dịch lên trên 5px */
-    left: -5px; /* Dịch sang trái 5px */
-    width: calc(100% + 1px); /* Tăng kích thước thêm 10px (5px trái + 5px phải) */
-    height: calc(100% + 1px); /* Tăng kích thước thêm 10px (5px trên + 5px dưới) */
-    
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     pointer-events: none; /* Giúp không chặn click */
 
-    /* THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
+    /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
     background-image: url('vien.png'); 
     background-size: cover;
     background-position: center;
 
-    /* Đảm bảo viền nằm trên ảnh */
+   .avatar-wrapper {
+    /* 💡 Kích thước khu vực chứa avatar */
+    width: 150px; 
+    height: 150px; 
+    position: relative;
+}
+
+/* 💡 PHẦN VIỀN BẰNG PSEUDO-ELEMENT (LỚP TRÊN) */
+.avatar-wrapper::after {
+    content: ""; /* Bắt buộc */
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    /* 💡 KÍCH THƯỚC BẰNG PX: Bằng kích thước của .avatar-wrapper (150px) */
+    width: 160px; 
+    height: 160px;
+    
+    border-radius: 50%;
+    pointer-events: none; /* Giúp không chặn click */
+
+    /* 💡 THAY ĐƯỜNG LINK ẢNH DÙNG LÀM VIỀN CỦA BẠN VÀO ĐÂY */
+    background-image: url('vien.png'); 
+    background-size: cover;
+    background-position: center;
+
+    /* 💡 Đảm bảo viền nằm trên ảnh */
     z-index: 2; 
 }
 
 .avatar {
-    width: 100%;
-    height: 100%;
+    /* 💡 KÍCH THƯỚC BẰNG PX: Bằng kích thước của .avatar-wrapper (150px) */
+    width: 150px; 
+    height: 150px;
+    
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #fff; /* Viền trắng bên trong (sát ảnh) */
     
-    /* Đặt z-index thấp hơn viền */
+    /* Viền trắng bên trong (sát ảnh) */
+    border: 4px solid #fff; 
+    
+    /* 💡 Đặt z-index thấp hơn viền */
     z-index: 1; 
     
-    /* THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
+    /* 💡 THAY ẢNH AVATAR CỦA BẠN VÀO ĐÂY */
     content: url('avatar.png'); 
 }
 
-.name {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: var(--cool-pink); 
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-}
 
 
         .name {
