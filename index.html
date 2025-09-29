@@ -48,33 +48,30 @@
       text-align: center;
     }
 
-    /* Avatar + viền */
-    .avatar-wrapper {
-      width: var(--size);
-      height: var(--size);
-      margin: 0 auto 20px;
+     .avatar-wrapper {
       position: relative;
-      border-radius: 50%;
+      display: inline-block;
+      margin-top: 30px;
+      width: 150px;
     }
-    .avatar-wrapper img {
-      width: var(--avatar-size);
-      height: var(--avatar-size);
+
+    .avatar-border {
+      width: 120px;
+      height: 120px;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 0;
+    }
+
+    .avatar {
+      width: 150px;
+      height: 150px;
       object-fit: cover;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
+      z-index: 1;
     }
-    .avatar-wrapper::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: var(--frame-url) center/cover no-repeat;
-      pointer-events: none;
-      z-index: 2;
-    }
+
 
     /* Tên + tick xanh */
     .name {
@@ -298,8 +295,10 @@
   <div class="bio-container">
     <header class="profile-header">
       <div class="avatar-wrapper">
-        <img src="avatar.png" alt="Avatar">
-      </div>
+  <img src="avatar.png" class="avatar-border" alt="Viền PNG">
+  <img src="vien.png" class="avatar" alt="Avatar">
+</div>
+
       <h1 class="name">
         Đàm Trọng Nghĩa
         <a href="tick.png" class="verified-link" target="_blank" title="Link Xác Thực">
