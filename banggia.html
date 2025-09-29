@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Giá Dịch Vụ MXH</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    :root {
+      --cool-pink: #ff4dd2; /* Hồng nổi bật */
+      --dark-pink: #C71585;
+      --light-pink: #ff99dd;
+      --text-color: #333;
+      --border-radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+      background-image: url('bgr.png'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      color: #000;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.4em;
+      color: var(--dark-pink);
+    }
+
+    .card ul, .text-list {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      margin: 5px 0;
+    }
+
+    .section-title {
+      margin: 12px 0 6px;
+      font-weight: 700;
+      color: var(--cool-pink);
+    }
+
+    .section-header {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      margin:30px 0 10px;
+    }
+    .section-header__line {
+      width:100%;
+      border:none;
+      border-top:2px solid #fff;
+      opacity:.9;
+    }
+    .section-header__title {
+      margin:0;
+      text-align:center;
+      font-weight:700;
+      font-size:clamp(20px,2.5vw,28px);
+      letter-spacing:.2px;
+      color: #fff;
+    }
+
+    /* Menu 3 gạch */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+      background: var(--cool-pink);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s;
+    }
+    .menu-toggle:hover { background: var(--dark-pink); }
+
+    .sidebar-menu {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      padding-top: 60px;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-menu.active { left: 0; }
+
+    .sidebar-menu a {
+      padding: 15px 20px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 600;
+      border-bottom: 1px solid var(--light-pink);
+      transition: background 0.2s;
+    }
+    .sidebar-menu a:hover {
+      background: var(--light-pink);
+      color: var(--dark-pink);
+    }
+
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+ <!-- Nút menu -->
+  <button id="menu-toggle" class="menu-toggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Menu bên -->
+  <nav id="sidebar-menu" class="sidebar-menu">
+    <a href="index.html">Profile</a>
+    <a href="banggia.html">Bảng Giá</a>
+    <a href="khodv.html">Kho Dịch Vụ</a>
+    <a href="taoqr.html">Tạo Qr từ link</a>
+    <a href="muachu.html">Mưa Chữ</a>
+  </nav>
+
+  <!-- Lưu ý -->
+  <div class="card">
+    <h3>🚀 Lưu Ý - Không Tuân Thủ Những Điều Này Sẽ Không Được Hoàn Tiền</h3>
+    <ul>
+      <li>Tài khoản phải để công khai</li>
+      <li>Không đổi thông tin (tên, id,...) khi chạy đơn</li>
+      <li>Không chạy 2 bên cùng lúc</li>
+      <li>Gửi đúng thông tin (Link)</li>
+    </ul>
+  </div>
+
+  <!-- Dịch vụ Locket -->
+  <div class="section-header">
+    <hr class="section-header__line">
+    <h2 class="section-header__title">Dịch Vụ Locket Widget</h2>
+  </div>
+
+  <div class="card">
+    <h3>✨ Gói Locket Boo</h3>
+    <div class="text-list">
+      <p>📸 Đăng không giới hạn</p>
+      <p>🚫 Không cần nâng Gold</p>
+      <p>🔒 Đăng riêng tư</p>
+      <p>🖼️ Đăng ảnh & 🎥 video từ album</p>
+      <p>🎨 Caption màu nổi bật</p>
+      <p>🖌️ Chèn logo hoặc ảnh vào caption</p>
+      <p>😂 Thêm meme & gif trong caption</p>
+      <p>📱 Hỗ trợ mọi thiết bị</p>
+    </div>
+
+    <p class="section-title">⚠️ LƯU Ý</p>
+    <div class="text-list">
+      <p>Người dùng không đăng trực tiếp → cần gửi thông tin cho trung gian để admin đăng.</p>
+      <p>Thông tin cần gửi gồm: TK – MK, ảnh, caption, ảnh cạnh caption.</p>
+    </div>
+
+    <p class="section-title">💰 GIÁ CẢ</p>
+    <div class="text-list">
+      <p>💎 5k / 1 tháng</p>
+      <p>💎 10k / 5 tháng</p>
+      <p>💎 15k / 12 tháng</p>
+      <p>💎 45k / vĩnh viễn (cho đến khi Locket fix)</p>
+      <p>💎 50k / vĩnh viễn + lên locket gold</p>
+    </div>
+
+    <img src="https://i.postimg.cc/jj9rYwjb/IMG-20250831-141318.jpg" 
+         alt="Ảnh minh họa Đặc Quyền" 
+         style="width:100%; max-width:250px; border-radius:12px; object-fit:cover; box-shadow:0 0 10px rgba(255,77,210,0.6); margin-top:10px;">
+    <p style="margin-top:8px; font-size:13px; color:#ff99dd; font-weight:bold; text-align:center;">
+      🌸 Ảnh minh họa 🌸
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>✨ Gói Locket 3s</h3>
+    <div class="text-list">
+      <p>👤 Kết bạn không giới hạn</p>
+      <p>🖼️ Đăng ảnh từ album</p>
+      <p>🎨 Caption dài hơn</p>
+      <p>🖌️ Đổi được camera theme</p>
+      <p>😂 Đổi màu viền widget</p>
+      <p>📱 Xem được ai đã xem bài đăng</p>
+      <p>📷 Quay được video 3s</p>
+    </div>
+    <p class="section-title">💰 GIÁ CẢ</p>
+    <div class="text-list">
+      <p>Android - 20k: vĩnh viễn</p>
+      <p>IOS - 30k: vĩnh viễn</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>✨ Gói Locket 15s</h3>
+    <div class="text-list">
+      <p>👤 Kết bạn không giới hạn</p>
+      <p>🖼️ Đăng ảnh từ album</p>
+      <p>🎨 Caption dài hơn</p>
+      <p>🖌️ Đổi được camera theme</p>
+      <p>😂 Đổi màu viền widget</p>
+      <p>📱 Xem được ai đã xem bài đăng</p>
+      <p>📷 Quay được video 15s</p>
+    </div>
+    <p class="section-title">💰 GIÁ CẢ</p>
+    <div class="text-list">
+      <p>IOS - 45k: vĩnh viễn (có bảo hành)</p>
+    </div>
+  </div>
+
+  <!-- Dịch vụ MXH -->
+  <div class="section-header">
+    <hr class="section-header__line">
+    <h2 class="section-header__title">Dịch Vụ Mạng Xã Hội</h2>
+  </div>
+
+  <div class="card">
+    <h3>📱 Dịch Vụ TikTok</h3>
+    <ul>
+      <li>1.5k/100 tim</li>
+      <li>2k/10.000 view</li>
+      <li>10k/100 follower</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>📱 Dịch Vụ Facebook</h3>
+    <ul>
+      <li>1.5k/50 cảm xúc</li>
+      <li>2k/1.000 view</li>
+      <li>10k/100 follower</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>📱 Dịch Vụ Instagram</h3>
+    <ul>
+      <li>1k/100 like</li>
+      <li>2k/1.000 view</li>
+      <li>10k/150 follower</li>
+    </ul>
+  </div>
+
+  <!-- Nạp game -->
+  <div class="section-header">
+    <hr class="section-header__line">
+    <h2 class="section-header__title">Giá Nạp Game</h2>
+  </div>
+
+  <div class="card">
+    <h3>⚡ Nạp Free Fire - Liên Quân</h3>
+    <ul>
+      <li>51 KC | 20 QH – 10.000đ</li>
+      <li>113 KC | 40 QH – 20.000đ</li>
+      <li>283 KC | 102 QH – 50.000đ</li>
+      <li>566 KC | 204 QH – 100.000đ</li>
+      <li>1.132 KC | 408 QH – 200.000đ</li>
+      <li>2.830 KC | 1.020 QH – 500.000đ</li>
+      <li>5.750 KC | 2.090 QH – 1.000.000đ</li>
+      <li>11.500 KC | 2.180 QH – 2.000.000đ</li>
+    </ul>
+  </div>
+
+  <!-- App Premium -->
+  <div class="section-header">
+    <hr class="section-header__line">
+    <h2 class="section-header__title">App Pro - Premium</h2>
+  </div>
+
+  <div class="card">
+    <h3>📲 IOS</h3>
+    <ul>
+      <li>Locket Gold IOS 3s: 30k / 1 thiết bị</li>
+      <li>Locket Gold IOS 15s: 45k / 1 thiết bị</li>
+      <li>Picsart Prem: 15k / 1 thiết bị</li>
+      <li>SoundCloud Go+: 15k / 1 thiết bị</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>🤖 Android</h3>
+    <ul>
+      <li>Duolingo Max: 15k / 1 thiết bị</li>
+      <li>Locket Gold 3s: 20k / 1 thiết bị</li>
+      <li>NGL Pro: 10k / 1 thiết bị</li>
+      <li>B612 Prem: 15k / 1 thiết bị</li>
+      <li>Remini Prem: 10k / 1 thiết bị</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Script mở menu -->
+<script>
+  const toggleBtn = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar-menu");
+
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>
