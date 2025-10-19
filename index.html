@@ -1,39 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vũ trụ tình yêu </title>
-    <link rel="stylesheet" href="style.css">
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.152.2/build/three.module.js",
-        "three/addons/controls/OrbitControls.js": "https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js",
-        "three/examples/jsm/loaders/FontLoader.js": "https://unpkg.com/three@0.152.2/examples/jsm/loaders/FontLoader.js",
-        "three/examples/jsm/geometries/TextGeometry.js": "https://unpkg.com/three@0.152.2/examples/jsm/geometries/TextGeometry.js"
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Cá Nhân</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg-color: #f0f0f0;
+      --text-color: #1a1a1a;
+      --card-bg-color: #fff;
+      --divider-color: #ccc;
+      --highlight-color: #000;
     }
-    </script>
-</head>
 
+    body {
+      background-color: var(--main-bg-color);
+      color: var(--text-color);
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+  .menu-toggle::before {
+  content: "🌸"; /* Dùng icon hoa anh đào thay thế */
+  font-size: 25px;
+  line-height: 1;
+  color: var(--text-color);
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+/* Đảm bảo phần tử gốc .menu-toggle không có nội dung nếu dùng ::before */
+.menu-toggle {
+    /* Xóa nội dung gốc nếu có */
+    font-size: 0; /* Hoặc ẩn text-indent */
+}
+
+.menu-toggle:hover::before {
+    color: var(--highlight-color);
+}
+
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 150px;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding-top: 60px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu.active {
+      transform: translateX(0);
+    }
+
+    .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 20px;
+      transition: background-color 0.2s ease;
+      text-align: left;
+    }
+
+    .menu a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      background-image: url('nen2.png');
+      background-size: cover;
+      background-position: center;
+      background-color: var(--card-bg-color);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #000, #333, #666);
+      padding: 5px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--card-bg-color);
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-wrapper:hover .avatar {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 5px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .username {
+      font-size: 15px;
+      color: #00f;
+      font-weight: 400;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    .description {
+      font-size: 10px;
+      line-height: 1.6;
+      color: #000;
+      padding: 0 10px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      margin: 30px 0;
+      width: 80%;
+      margin: 30px auto;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px; 
+    }
+
+    .contact-button {
+      width: 90%; 
+      max-width: 300px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background-color: rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .contact-button:hover {
+      transform: translateY(-3px);
+      background-color: rgba(0, 0, 0, 0.7);
+      border-color: #fff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
 <body>
-  <audio id="bg-music" autoplay loop>
-   <source src="" type="audio/mpeg" />
-  </audio>
-    <div id="container"></div>
-    <div id="landscape-warning">
-      <div class="warning-content">
-        <div class="rotate-icon"></div>
-        <h1>NHỚ EM</h1>
-        <h1>Tinh Cầu</h1>
-        <div class="stars-bg"></div>
-      </div>
+  
+  
+
+  <div class="container">
+    <div class="avatar-wrapper">
+      <img src="huynhthibaotran.png" class="avatar" alt="Avatar">
     </div>
-    <div id="dark-overlay"></div>
-    <div id="info">
-      
+    
+    <h1>Ng.Huỳnh Bảo Trân
+      <img src="https://i.postimg.cc/zfdHxRYf/IMG-20250729-173606-preview-rev-1.png" alt="tick xanh" style="width: 16px; height: 16px; vertical-align: middle; margin-left: 5px;">
+    </h1>
+   
+    
+
+    <hr class="divider" />
+    
+    <div class="button-group">
+      <a href="," target="_blank" class="contact-button">Zalo</a>
+      <a href="," target="_blank" class="contact-button">Facebook</a>
+       <a
+       <a href="," target="_blank" class="contact-button">TikTok</a>
+       <a href="," target="_blank" class="contact-button">Locket</a>
     </div>
-    <script type="module" src="script.js"></script>
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', function() {
+      menu.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
